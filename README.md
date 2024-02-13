@@ -20,7 +20,6 @@ Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_mediu
 
 # HIFI-API + Vercel
 
-# [![Python testing](https://github.com/sachinsenal0x64/host-hifi-restapi-on-vercel/actions/workflows/python-app.yml/badge.svg?branch=main)](https://github.com/sachinsenal0x64/host-hifi-restapi-on-vercel/actions/workflows/python-app.yml)
 [![Docker Image CI](https://github.com/sachinsenal0x64/host-hifi-restapi-on-vercel/actions/workflows/docker-image.yml/badge.svg)](https://github.com/sachinsenal0x64/host-hifi-restapi-on-vercel/actions/workflows/docker-image.yml)
 
 ## Running Locally
