@@ -1,20 +1,14 @@
-# Test your FastAPI endpoints
+# Test your HIFI-API endpoints
 
 GET http://127.0.0.1:8000/
 Accept: application/json
 
 ###
 
-GET http://127.0.0.1:8000/hello/User
+GET http://127.0.0.1:8000/search/?q=Mine
 Accept: application/json
 
 ###
 
-POST /hello HTTP/1.1
-Host: 127.0.0.1:8000
-Content-Type: application/json
-Content-Length: 28
-
-{
-    "message": "Fulano!"
-}
+GET http://127.0.0.1:8000/track/?id=286266926&quality=LOSSLESS
+Accept: application/json
