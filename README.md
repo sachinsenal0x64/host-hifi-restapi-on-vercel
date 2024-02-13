@@ -18,15 +18,12 @@
 <br>
 
 # 🏠 Running Locally
-<br>
 
 ### 🐳 Docker Compose
 
 ```bash
 docker-compose up
 ```
-
-<br>
 
 ### 🐳 Docker File
 
@@ -38,7 +35,6 @@ docker build -t host-hifi-restapi-on-vercel .
 docker run -p 8000:8000 host-hifi-restapi-on-vercel
 
 ```
-<br>
 
 ### 🦄 Uvicorn
 > 🐉 Install dependencies
@@ -52,9 +48,7 @@ python main.py
 ```
 🎉 Your reverse proxy is now available at http://localhost:8000.
 
-
 <br>
 
 ## 🤝 Contributing
-
 Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/sachinsenal0x64/host-hifi-restapi-on-vercel/issues).
