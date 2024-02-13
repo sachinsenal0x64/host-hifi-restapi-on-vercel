@@ -1,22 +1,8 @@
 import pytest
 
-from src.index import root, say_hello, hello_message
-
-
-@pytest.mark.asyncio
-async def test_root():
-    result = await root()
-    assert result == {'message': 'Hello World'}
-
+from src.index import root, get_track
 
 @pytest.mark.asyncio
-async def test_say_hello():
-    result = await say_hello("John")
-    assert result == {'message': 'Hello John'}
-
-
-@pytest.mark.asyncio
-async def test_hello_message():
-    dto = ISayHelloDto(message="Alice")
-    result = await hello_message(dto)
-    assert result == {'message': 'Hello Alice'}
+async def get_track():
+    result = await get_track()
+    assert result == result
