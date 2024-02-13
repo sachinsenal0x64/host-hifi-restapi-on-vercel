@@ -5,7 +5,7 @@
 
 <div align="center">
  
-   #### This is [Hifi Tui](https://github.com/sachinsenal0x64/hifi-tui) core it base on this API and you can selfhost :)) 
+   #### This is [Hifi Tui](https://github.com/sachinsenal0x64/hifi-tui) core it base on this API and you can selfhost :)
  
    [![Docker Image CI](https://github.com/sachinsenal0x64/host-hifi-restapi-on-vercel/actions/workflows/docker-image.yml/badge.svg)](https://github.com/sachinsenal0x64/host-hifi-restapi-on-vercel/actions/workflows/docker-image.yml)
  
