@@ -21,7 +21,7 @@
 
 - Redis (it free)
 
-- Grab Tokens / Ids Using [tidal_auth.py](https://github.com/sachinsenal0x64/hifi-tui/blob/main/tidal_auth/tidal_auth.py)
+- Grab Tokens / Ids Using [tidal_auth.py](https://github.com/sachinsenal0x64/hifi-tui/blob/main/tidal_auth/)
 
 <br>
 
