@@ -176,7 +176,7 @@ async def get_track(
 async def get_song(
     q: str,
     quality: str,
-    country:  Union[str, None] = Query(default=None, max_length=50),
+    country:  Union[str, None] = Query(default=None, max_length=3),
 ):
     tokz = await refresh()
     tidal_token = tokz
