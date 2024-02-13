@@ -50,7 +50,7 @@ pip install -r requirements.txt
 ```bash
 python main.py
 ```
-🎉 Your reverse proxy is now available at `http://localhost:8000`.
+🎉 Your reverse proxy is now available at http://localhost:8000.
 
 
 <br>
