@@ -1,2 +1,65 @@
-# host-hifi-restapi-on-vercel
-This is Hifi Tui core it base on this API and you can selfhost :))
+<p align="center">
+ <img width="100px" src="https://raw.githubusercontent.com/hebertcisco/vercel-typescript-express-api/cebd0c563141a4cc7d279997b8cb5dd9232d7591/.github/images/favicon512x512-vercel-typescript-express-api.png" align="center" alt=":package: deploy-hifi-restapi-on-vercel" />
+ <h2 align="center">:package: Host HiFi REST API ON Vercel</h2>
+</p>
+ <p align="center">
+    <a href="https://github.com/sachinsenal0x64/host-hifi-restapi-on-vercel/issues">
+      <img alt="Issues" src="https://img.shields.io/github/issues/sachinsenal0x64/host-hifi-restapi-on-vercel?style=flat&color=336791" />
+    </a>
+    <a href="https://github.com/sachinsenal0x64/host-hifi-restapi-on-vercel/pulls">
+      <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/sachinsenal0x64/host-hifi-restapi-on-vercel?style=flat&color=336791" />
+    </a>
+
+<br>
+
+# Getting started
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fhebertcisco%2Fhost-hifi-restapi-on-vercel%2Ftree%2Fmain%2Fpython%2FFastApi&demo-title=HifiAPI%20%2B%20Vercel&demo-description=Use%20HifiAPI%202%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2FFastApi-python-template.vercel.app%2F&demo-image=https://sachinsenal0x64.github.io/picx-images-hosting/cover.5gnodmhum874.webp)
+
+# HifiAPI + Vercel
+
+[![Python testing](https://github.com/sachinsenal0x64/host-hifi-restapi-on-vercel/actions/workflows/python-app.yml/badge.svg?branch=main)](https://github.com/sachinsenal0x64/host-hifi-restapi-on-vercel/actions/workflows/python-app.yml)
+[![Docker Image CI](https://github.com/sachinsenal0x64/host-hifi-restapi-on-vercel/actions/workflows/docker-image.yml/badge.svg)](https://github.com/sachinsenal0x64/host-hifi-restapi-on-vercel/actions/workflows/docker-image.yml)
+
+## Running Locally
+
+### With Docker Compose
+
+```bash
+docker-compose up
+```
+
+### With Docker
+
+```bash
+# Build the Docker image
+docker build -t host-hifi-restapi-on-vercel .
+
+# Run the Docker contaer
+docker run -p 8000:8000 host-hifi-restapi-on-vercel
+
+```
+
+### With uvicorn
+
+#### Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+```bash
+uvicorn main:app --host 0.0.0.0 --port 8000
+```
+
+Your FastApi application is now available at `http://localhost:8000`.
+
+## One-Click Deploy
+
+Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=vercel-examples):
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsachinsenal0x64%2Fhost-hifi-restapi-on-vercel%2Ftree%2Fmain%2Fpython%2FHifiAPI&demo-title=HifiAPI%20%2B%20Vercel&demo-description=Use%20HifiAPI%202%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2FHifiAPI.vercel.app%2F&demo-image=https://sachinsenal0x64.github.io/picx-images-hosting/cover.5gnodmhum874.webp)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](issues).
