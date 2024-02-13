@@ -17,7 +17,7 @@
 
 - Tidal Subscription
 
-- Fill the .env
+- Fill the [.env](https://github.com/sachinsenal0x64/host-hifi-restapi-on-vercel/blob/main/src/.env)
 
 - Redis (it free)
 
