@@ -18,13 +18,13 @@
 
 ##  🏠 Running Locally
 
-### 🐳 With Docker Compose
+### 🐳 Docker Compose
 
 ```bash
 docker-compose up
 ```
 
-### 🐳 With Docker
+### 🐳 Docker File
 
 ```bash
 # Build the Docker image
@@ -35,7 +35,7 @@ docker run -p 8000:8000 host-hifi-restapi-on-vercel
 
 ```
 
-### 🦄 With uvicorn
+### 🦄 Uvicorn
 
 #### 🐉 Install dependencies
 
@@ -44,10 +44,10 @@ pip install -r requirements.txt
 ```
 
 ```bash
-uvicorn main:app --host 0.0.0.0 --port 8000
+python main.py
 ```
 
-Your reverse proxy application is now available at `http://localhost:8000`.
+Your reverse proxy is now available at `http://localhost:8000`.
 
 ## 🤝 Contributing
 
