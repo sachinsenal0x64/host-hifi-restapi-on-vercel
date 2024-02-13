@@ -1,6 +1,5 @@
 import pytest
 
-from src.dtos.ISayHelloDto import ISayHelloDto
 from src.index import root, say_hello, hello_message
 
 
