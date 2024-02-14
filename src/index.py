@@ -11,7 +11,6 @@ import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Query
 from redis import client
-from api_analytics.fastapi import Analytics
 
 app = FastAPI()
 
