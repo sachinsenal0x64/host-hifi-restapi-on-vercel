@@ -10,7 +10,6 @@ import rich
 import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Query
-from httpx_auth import Basic
 from redis import client
 
 app = FastAPI()
