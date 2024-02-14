@@ -25,12 +25,9 @@ redis_url = os.getenv("REDIS_URL")
 redis_port = os.getenv("REDIS_PORT")
 redis_password = os.getenv("REDIS_PASSWORD")
 user_id = os.getenv("USER_ID")
-analytics = os.getenv("ANALYTICS")
 
 client_id = "zU4XHVVkc2tDPo4t"
 client_secret = "VJKhDFqJPqvsPVNBV6ukXTJmwlvbttP7wlMlrc72se4="
-
-app.add_middleware(Analytics, api_key=analytics)
 
 # with open("token.json", "r") as tok:
 #     token = json.loads(tok.read())
