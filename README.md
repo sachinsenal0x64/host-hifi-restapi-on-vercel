@@ -19,7 +19,7 @@
 
 - Fill the [.env](https://github.com/sachinsenal0x64/host-hifi-restapi-on-vercel/blob/main/src/.env)
 
-- Redis (it free)
+- Redis (its free)
 
 - Grab Tokens / Ids Using [tidal_auth.py](https://github.com/sachinsenal0x64/hifi-tui/blob/main/tidal_auth/)
 
