@@ -11,7 +11,6 @@ import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.datastructures import Default
-from httpx_auth import Basic
 from redis import client
 
 app = FastAPI()
