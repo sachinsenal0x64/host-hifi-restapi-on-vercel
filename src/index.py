@@ -4,7 +4,6 @@ import json
 import os
 from logging import raiseExceptions
 from typing import Union
-
 import httpx
 import redis
 import rich
