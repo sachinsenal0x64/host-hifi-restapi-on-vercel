@@ -4,12 +4,15 @@ import json
 import os
 from logging import raiseExceptions
 from typing import Union
+
 import httpx
 import redis
 import rich
 import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.datastructures import Default
+from httpx_auth import Basic
 from redis import client
 
 app = FastAPI()
@@ -27,6 +30,7 @@ user_id = os.getenv("USER_ID")
 
 client_id = "zU4XHVVkc2tDPo4t"
 client_secret = "VJKhDFqJPqvsPVNBV6ukXTJmwlvbttP7wlMlrc72se4="
+
 
 # with open("token.json", "r") as tok:
 #     token = json.loads(tok.read())
@@ -171,11 +175,7 @@ async def get_track(
 
 
 @app.api_route("/song/", methods=["GET"])
-async def get_song(
-    q: str,
-    quality: str,
-    country:  Union[str, None] = Query(default=None, max_length=3),
-):
+async def get_song(q: str, quality: str):
     tokz = await refresh()
     tidal_token = tokz
     search_url = f"https://api.tidal.com/v1/search/tracks?countryCode=US&query={q}"
@@ -219,6 +219,18 @@ async def search_track(q: str):
     async with httpx.AsyncClient() as clinet:
         search_data = await clinet.get(url=search_url, headers=header)
         sed = search_data.json()["items"]
+        return [sed]
+
+
+@app.api_route("/album/", methods=["GET"])
+async def search_album(id: int):
+    tokz = await refresh()
+    tidal_token = tokz
+    search_url = f"https://api.tidal.com/v1/albums/{id}/?countryCode=US"
+    header = {"authorization": f"Bearer {tidal_token}"}
+    async with httpx.AsyncClient() as clinet:
+        album_data = await clinet.get(url=search_url, headers=header)
+        sed = album_data.json()
         return [sed]
 
 
