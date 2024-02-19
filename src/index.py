@@ -217,7 +217,7 @@ async def search_track(q: str):
     async with httpx.AsyncClient() as clinet:
         search_data = await clinet.get(url=search_url, headers=header)
         sed = search_data.json()["items"]
-        return [sed]
+        return sed
 
 
 @app.api_route("/album/", methods=["GET"])
