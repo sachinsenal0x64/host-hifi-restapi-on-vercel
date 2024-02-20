@@ -12,4 +12,10 @@
       "dest": "api/index.py"
     }
   ]
+  "crons": [
+    {
+    "path": "/api/cron",
+    "schedule": "0 5 * * *"
+    }
+  ]
 }
