@@ -137,7 +137,7 @@ async def auth():
 
 @app.api_route("/", methods=["GET"])
 async def index():
-    return {"HIFI-API": "v1", "REPO": "https://github.com/sachinsenal0x64/Hifi-Tui"}
+    return {"HIFI-API": "v1.0", "REPO": "https://github.com/sachinsenal0x64/Hifi-Tui"}
 
 
 @app.api_route("/track/", methods=["GET"])
