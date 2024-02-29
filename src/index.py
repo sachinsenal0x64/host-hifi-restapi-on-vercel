@@ -4,6 +4,7 @@ import json
 import os
 from logging import raiseExceptions
 from typing import Union
+
 import httpx
 import redis
 import rich
@@ -172,7 +173,7 @@ async def get_track(
     except KeyError:
         raise HTTPException(
             status_code=404,
-            detail=track_data.json(),
+            detail="Quality not found. check API docs = https://github.com/sachinsenal0x64/Hifi-Tui?tab=readme-ov-file#-api-documentation",
         )
 
 
