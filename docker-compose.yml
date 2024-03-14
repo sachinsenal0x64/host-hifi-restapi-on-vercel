@@ -1,6 +1,7 @@
 services:
   web:
-    build: .
+    build: 
+      - .
     env_file:
       - .env
     ports:
