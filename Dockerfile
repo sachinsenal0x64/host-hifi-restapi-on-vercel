@@ -9,4 +9,4 @@ RUN pip install --upgrade pip && \
 
 COPY . .
 
-CMD ["uvicorn", "main:app"]
+CMD ["python", "main:app"]
