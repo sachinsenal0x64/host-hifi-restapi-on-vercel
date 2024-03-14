@@ -69,7 +69,7 @@ docker run -p 8000:8000 host-hifi-restapi-on-vercel
 ```
 <br>
 
-## 🏠 API SELF HOSTING
+### 🦄 API SELF HOSTING
 
 > [!NOTE]
 > This Required [Tidal](https://tidal.com) subscription / [Redis](https://github.com/redis/redis) & Fill the [.env](https://github.com/sachinsenal0x64/Hifi-Tui/blob/main/api/.env-example) file. / Grab Tokens and Ids Using
