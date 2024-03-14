@@ -64,7 +64,7 @@ docker-compose up
 docker build -t host-hifi-restapi-on-vercel .
 
 # Run the Docker contaer
-docker run -p 8000:8000 host-hifi-restapi-on-vercel
+docker run -p 80:5000 host-hifi-restapi-on-vercel
 
 ```
 <br>
