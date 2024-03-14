@@ -54,12 +54,19 @@
 ### 🐳 Docker Compose
 
 ```bash
+# Clone the Repo
+https://github.com/sachinsenal0x64/host-hifi-restapi-on-vercel
+
+# Run the Docker contaer
 docker-compose up
 ```
 
 ### 🐳 Docker File
 
 ```bash
+# Clone the Repo
+https://github.com/sachinsenal0x64/host-hifi-restapi-on-vercel
+
 # Build the Docker image
 docker build -t host-hifi-restapi-on-vercel .
 
