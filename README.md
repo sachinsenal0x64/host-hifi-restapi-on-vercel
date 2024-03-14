@@ -59,7 +59,6 @@ https://github.com/sachinsenal0x64/host-hifi-restapi-on-vercel
 
 # Rename .env-example
 cd host-hifi-restapi-on-vercel
-cd src
 mv .env-example .env
 
 # Run the Docker contaer
@@ -74,7 +73,6 @@ https://github.com/sachinsenal0x64/host-hifi-restapi-on-vercel
 
 # Rename .env-example
 cd host-hifi-restapi-on-vercel
-cd src
 mv .env-example .env
 
 # Build the Docker image
