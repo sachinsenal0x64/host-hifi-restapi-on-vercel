@@ -21,6 +21,8 @@
 <br>
 
 # ❓ Requirements
+> [!TIP]
+> You can access reverse [api](https://github.com/sachinsenal0x64/Hifi-Tui?tab=readme-ov-file#-tidal-reverse-api--status) for free.
 
 - Tidal Subscription
 
@@ -65,19 +67,48 @@ docker build -t host-hifi-restapi-on-vercel .
 docker run -p 8000:8000 host-hifi-restapi-on-vercel
 
 ```
+<br>
 
-### 🦄 Uvicorn
-> 🐉 Install dependencies
+## 🏠 API SELF HOSTING
 
-```bash
+> [!NOTE]
+> This Required [Tidal](https://tidal.com) subscription / [Redis](https://github.com/redis/redis) & Fill the [.env](https://github.com/sachinsenal0x64/Hifi-Tui/blob/main/api/.env-example) file. / Grab Tokens and Ids Using
+[tidal_auth.py](https://github.com/sachinsenal0x64/hifi-tui/tree/main/tidal_auth)
+
+> [!TIP]
+> You can access reverse [api](https://github.com/sachinsenal0x64/Hifi-Tui?tab=readme-ov-file#-tidal-reverse-api--status) for free.
+
+
+
+
+<br>
+
+```env
+
+CLIENT_ID= 
+CLIENT_SECRET=
+TIDAL_TOKEN= 
+TIDAL_REFRESH=
+REDIS_URL=
+REDIS_PORT=
+REDIS_PASSWORD=
+USER_ID= 
+
+```
+
+```console
+git clone https://github.com/sachinsenal0x64/hifi-tui
+cd hifi-tui
+cd api
+mv env-example .env
 pip install "fastapi[all]"
 pip install -r requirements.txt
-```
-
-```bash
 python main.py
+
 ```
-🎉 Your reverse proxy is now available at http://localhost:8000.
+![fastapi](https://sachinsenal0x64.github.io/picx-images-hosting/300191675-4330ea31-3f15-45b0-962c-ca5a85041f02.5tz3jj54f2ps.webp)
+
+🎉 Your reverse proxy is now available at http://localhost:5000.
 
 <br>
 
