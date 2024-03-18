@@ -16,12 +16,6 @@ app = FastAPI(title="HiFi-RestAPI", version="1.0")
 
 favicon_path = "favicon.ico"
 
-
-@app.get("/favicon.ico", include_in_schema=False)
-async def favicon():
-    return FileResponse(favicon_path)
-
-
 load_dotenv()
 
 client_id = os.getenv("CLIENT_ID")
@@ -150,6 +144,11 @@ async def auth():
         }
 
     return out_res
+
+
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    return FileResponse(favicon_path)
 
 
 @app.api_route("/", methods=["GET"])
