@@ -14,7 +14,6 @@ from fastapi.responses import FileResponse
 
 app = FastAPI(title="HiFi-RestAPI", version="1.0")
 
-favicon_path = "favicon.ico"
 
 load_dotenv()
 
@@ -148,7 +147,8 @@ async def auth():
 
 @app.get("/favicon.ico", include_in_schema=False)
 async def favicon():
-    return FileResponse(favicon_path)
+    dirname = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__))))
+    return FileResponse(f"{dirname}/favicon.ico")
 
 
 @app.api_route("/", methods=["GET"])
