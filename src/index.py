@@ -14,7 +14,7 @@ from fastapi.responses import FileResponse
 
 app = FastAPI(title="HiFi-RestAPI", version="1.0")
 
-favicon_path = "./favicon.ico"
+favicon_path = "favicon.ico"
 
 load_dotenv()
 
