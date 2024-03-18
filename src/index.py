@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse
 
-app = FastAPI(title="HiFi-RestAPI", version="1.0")
+app = FastAPI(title="HiFi-RestAPI", version="v1.0")
 
 
 load_dotenv()
