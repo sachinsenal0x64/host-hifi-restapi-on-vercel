@@ -10,10 +10,17 @@ import rich
 import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.responses import FileResponse
 
-app = FastAPI(
-    title="HiFi-RestAPI",
-)
+app = FastAPI(title="HiFi-RestAPI", version="1.0")
+
+favicon_path = "favicon.ico"
+
+
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    return FileResponse(favicon_path)
+
 
 load_dotenv()
 
