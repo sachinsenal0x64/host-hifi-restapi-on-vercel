@@ -43,7 +43,6 @@
 
 # 📄 Documentation
 
-- [API-DOCS](https://github.com/sachinsenal0x64/hifi-tui?tab=readme-ov-file#-api-documentation) and [API-PLAYGROUND](https://tidal.401658.xyz/doc)
 - https://hifitui.401658.xyz
 - https://hifitui.pages.dev (Backup Url)
 
