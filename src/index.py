@@ -10,7 +10,7 @@ import rich
 import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Query
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, HTMLResponse
 
 app = FastAPI(title="HiFi-RestAPI", version="v1.0")
 
@@ -221,6 +221,47 @@ async def get_track(
         raise HTTPException(
             status_code=429,
         )
+
+
+@app.api_route("/doc", methods=["GET"])
+async def doc():
+    return HTMLResponse(
+        """
+
+<!doctype html>
+<html>
+  <head>
+    <title>API Reference</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <!-- Add your own OpenAPI/Swagger spec file URL here: -->
+    <!-- Note: this includes our proxy, you can remove the following line if you do not need it -->
+    <!-- data-proxy-url="https://api.scalar.com/request-proxy" -->
+    <script
+      id="api-reference"
+      type="application/json"
+      data-url="https://tidal.401658.xyz/openapi.json"
+      data-proxy-url="https://api.scalar.com/request-proxy"
+    ></script>
+    <!-- You can also set a full configuration object like this -->
+    <!-- easier for nested objects -->
+    <script>
+      var configuration = {
+        theme: "purple",
+      };
+
+      var apiReference = document.getElementById("api-reference");
+      apiReference.dataset.configuration = JSON.stringify(configuration);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
+  </body>
+</html>
+
+
+"""
+    )
 
 
 @app.api_route("/song/", methods=["GET"])
