@@ -151,7 +151,7 @@ async def favicon():
     return FileResponse(f"{dirname}/favicon.ico")
 
 
-@app.api_route("/", methods=["GET"])
+@app.api_route("/", methods=["GET"], include_in_schema=False)
 async def index():
     return {"HIFI-API": "v1", "REPO": "https://github.com/sachinsenal0x64/Hifi-Tui"}
 
@@ -223,7 +223,7 @@ async def get_track(
         )
 
 
-@app.api_route("/doc", methods=["GET"])
+@app.api_route("/doc", methods=["GET"], include_in_schema=False)
 async def doc():
     return HTMLResponse(
         """
