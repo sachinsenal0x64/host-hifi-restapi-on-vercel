@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse, HTMLResponse
 
-app = FastAPI(title="HiFi-RestAPI", version="v1.0")
+app = FastAPI(title="HiFi-RestAPI", version="v1.0", summary="Tidal Music Proxy")
 
 
 load_dotenv()
@@ -223,7 +223,7 @@ async def get_track(
         )
 
 
-@app.api_route("/doc", methods=["GET"], include_in_schema=False)
+@app.api_route("/tdoc", methods=["GET"], include_in_schema=False)
 async def doc():
     return HTMLResponse(
         """
