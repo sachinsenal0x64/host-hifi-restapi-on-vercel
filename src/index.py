@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse, HTMLResponse
 
-app = FastAPI(title="HiFi-RestAPI", version="v1.0", summary="Tidal Music Proxy")
+app = FastAPI(title="HiFi-RestAPI", version="v1.0", description="Tidal Music Proxy")
 
 
 load_dotenv()
