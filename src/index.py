@@ -331,16 +331,54 @@ async def get_song(q: str, quality: str):
 
 
 @app.api_route("/search/", methods=["GET"])
-async def search_track(q: str):
+async def search_track(
+    s: Union[str, None] = Query(default=None),
+    a: Union[str, None] = Query(default=None),
+    al: Union[str, None] = Query(default=None),
+    v: Union[str, None] = Query(default=None),
+    p: Union[str, None] = Query(default=None),
+):
     try:
         tokz = await refresh()
         tidal_token = tokz
-        search_url = f"https://api.tidal.com/v1/search/tracks?countryCode=US&query={q}"
+
+        search_url = f"https://api.tidal.com/v1/search/tracks?query={s}&limit=25&offset=0&countryCode=US"
+
+        artist_url = f"https://api.tidal.com/v1/search/top-hits?query={a}&limit=25&offset=0&types=TRACKS&countryCode=US"
+
+        album_url = f"https://api.tidal.com/v1/search/top-hits?query={al}&limit=25&offset=0&types=ALBUMS&countryCode=US"
+
+        video_url = f"https://api.tidal.com/v1/search/top-hits?query={v}&limit=25&offset=0&types=VIDEOS&countryCode=US"
+
+        playlist_url = f"https://api.tidal.com/v1/search/top-hits?query={p}&limit=25&offset=0&types=PLAYLISTS&countryCode=US"
+
         header = {"authorization": f"Bearer {tidal_token}"}
+
         async with httpx.AsyncClient() as clinet:
-            search_data = await clinet.get(url=search_url, headers=header)
-            sed = search_data.json()["items"]
-            return sed
+            if s:
+                search_data = await clinet.get(url=search_url, headers=header)
+                sed = search_data.json()
+                return sed
+
+            if a:
+                search_data = await clinet.get(url=artist_url, headers=header)
+                sed = search_data.json()
+                return sed
+
+            if al:
+                search_data = await clinet.get(url=album_url, headers=header)
+                sed = search_data.json()
+                return sed
+
+            if v:
+                search_data = await clinet.get(url=video_url, headers=header)
+                sed = search_data.json()
+                return sed
+
+            if p:
+                search_data = await clinet.get(url=playlist_url, headers=header)
+                sed = search_data.json()
+                return sed
 
     except httpx.ConnectTimeout:
         raise HTTPException(
