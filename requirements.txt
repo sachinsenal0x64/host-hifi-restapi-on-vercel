@@ -1,6 +1,6 @@
-fastapi==0.109.1
-httpx==0.25.2
+fastapi[all]==0.109.1
+httpx[http2]==0.25.2
 python-dotenv==1.0.0
 redis==5.0.1
 rich==13.3.3
-uvicorn==0.25.0
+uvicorn[standard]==0.25.0
