@@ -51,6 +51,22 @@
 
 # 🏠 Running Locally
 
+### 🐳 Docker Hub
+
+```bash
+# Clone the Repo
+https://github.com/sachinsenal0x64/hifi-tui
+
+# Rename .env-example
+cd hifi-tui/api
+mv .env-example .env
+
+# Run the Docker contaer
+docker pull sachinsenal/hifi-proxy
+docker run --env-file .env -p 8000:8000 hifi-tui
+
+```
+
 ### 🐳 Docker Compose
 
 ```bash
