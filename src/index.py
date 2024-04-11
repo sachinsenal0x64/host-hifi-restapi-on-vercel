@@ -165,50 +165,77 @@ async def doc():
 
 <!doctype html>
 <html>
-  <head>
-    <title>HiFi API Reference</title>
+<head>
+    <title>hifi api reference</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-  </head>
-  <body>
-    <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
+</head>
+<body>
 
-    <!-- Add your own OpenAPI/Swagger spec file URL here: -->
-    <!-- Note: this includes our proxy, you can remove the following line if you do not need it -->
-    <!-- data-proxy-url="https://api.scalar.com/request-proxy" -->
-    <script
-      id="api-reference"
-      type="application/json"
-      data-url="https://tidal.401658.xyz/openapi.json"
-      data-proxy-url="https://api.scalar.com/request-proxy"
-    ></script>
-    <!-- You can also set a full configuration object like this -->
-    <!-- easier for nested objects -->
-    <script>
-      var configuration = {
-        theme: "saturn",
-      };
+<script
+    id="api-reference"
+    type="application/json"
+    data-url="https://tidal.401658.xyz/openapi.json"
+    data-proxy-url="https://api.scalar.com/request-proxy"
+></script>
 
-      var apiReference = document.getElementById("api-reference");
-      apiReference.dataset.configuration = JSON.stringify(configuration);
-      
-      // Remove the text "Powered by scalar.com" and the URL while keeping the link
-      document.addEventListener("DOMContentLoaded", async function() {
-                         await removePoweredByTextAndUrl();
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    var configuration = {
+      theme: "saturn",
+    };
+
+    // Assuming the function needs to be executed after DOM is fully loaded
+    function removeTextAndHref() {
+      const pattern = /Powered by scalar\.com/g;
+
+      function removeTextUsingRegex(rootElement, regexPattern, replacementText) {
+          const nodes = rootElement.childNodes;
+          nodes.forEach(node => {
+              if (node.nodeType === 3) { // Node.TEXT_NODE
+                  const text = node.nodeValue;
+                  const newText = text.replace(regexPattern, replacementText);
+                  if (text !== newText) {
+                      node.nodeValue = newText;
+                  }
+              } else if (node.nodeType === 1) { // Node.ELEMENT_NODE
+                  removeTextUsingRegex(node, regexPattern, replacementText);
+
+                  if (node.classList.contains('darklight-reference-promo')) {
+                      node.removeAttribute('href');
+                  }
+              }
+          });
+      }
+
+      // Initial cleanup
+      removeTextUsingRegex(document.body, pattern, '');
+
+      // Observer for dynamic content
+      const observer = new MutationObserver(mutations => {
+          mutations.forEach(mutation => {
+              mutation.addedNodes.forEach(node => {
+                  if (node.nodeType === 1) { // Node.ELEMENT_NODE
+                      removeTextUsingRegex(node, pattern, '');
+                  }
+              });
+          });
       });
 
-      function removePoweredByTextAndUrl() {
-          var poweredByLink = document.querySelector('.darklight-reference-promo');
-          if (poweredByLink) {
-            poweredByLink.textContent = ""; // Setting text content to empty string
-            poweredByLink.removeAttribute("href"); // Removing the href attribute
-          }
-        }
-    </script>
-  </body>
-</html>
+      observer.observe(document.body, {
+          childList: true,
+          subtree: true
+      });
+    }
 
-"""
+    removeTextAndHref();
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
+
+</body>
+</html>"""
     )
 
 
