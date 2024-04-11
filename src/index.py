@@ -166,11 +166,13 @@ async def doc():
 <!doctype html>
 <html>
   <head>
-    <title>API Reference</title>
+    <title>HiFi API Reference</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
+    <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
+
     <!-- Add your own OpenAPI/Swagger spec file URL here: -->
     <!-- Note: this includes our proxy, you can remove the following line if you do not need it -->
     <!-- data-proxy-url="https://api.scalar.com/request-proxy" -->
@@ -203,7 +205,6 @@ async def doc():
           }
         }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
   </body>
 </html>
 
@@ -398,7 +399,7 @@ async def get_song(q: str, quality: str):
 
 
 @app.api_route("/search/", methods=["GET"])
-async def search_track(
+async def search(
     s: Union[str, None] = Query(default=None),
     a: Union[str, None] = Query(default=None),
     al: Union[str, None] = Query(default=None),
@@ -503,7 +504,7 @@ async def search_track(
 
 
 @app.api_route("/album/", methods=["GET"])
-async def search_album(id: int):
+async def get_album(id: int):
     try:
         tokz = await refresh()
         tidal_token = tokz
@@ -552,7 +553,7 @@ async def search_album(id: int):
 
 
 @app.api_route("/playlist/", methods=["GET"])
-async def search_playlist(id: str):
+async def get_playlist(id: str):
     try:
         tokz = await refresh()
         tidal_token = tokz
@@ -601,7 +602,7 @@ async def search_playlist(id: str):
 
 
 @app.api_route("/artist/", methods=["GET"])
-async def search_artist(id: int):
+async def get_artist(id: int):
     try:
         tokz = await refresh()
         tidal_token = tokz
@@ -666,7 +667,7 @@ async def search_artist(id: int):
 
 
 @app.api_route("/cover/", methods=["GET"])
-async def search_cover(id: Union[int, None] = None, q: Union[str, None] = None):
+async def get_cover(id: Union[int, None] = None, q: Union[str, None] = None):
     try:
         tokz = await refresh()
         tidal_token = tokz
