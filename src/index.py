@@ -2,14 +2,14 @@ import base64
 import json
 import os
 from typing import Union
-
+import uvicorn
 import httpx
 import redis.asyncio as redis
 import rich
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse, HTMLResponse
-
+import asyncio
 
 app = FastAPI(title="HiFi-RestAPI", version="v1.0", description="Tidal Music Proxy")
 
@@ -432,7 +432,6 @@ async def search(
     al: Union[str, None] = Query(default=None),
     v: Union[str, None] = Query(default=None),
     p: Union[str, None] = Query(default=None),
-    f: Union[int, None] = Query(default=None),
 ):
     try:
         tokz = await refresh()
@@ -475,26 +474,6 @@ async def search(
                 search_data = await clinet.get(url=playlist_url, headers=header)
                 sed = search_data.json()
                 return sed
-
-            if f:
-                artist_albums = f"https://api.tidal.com/v1/pages/single-module-page/ae223310-a4c2-4568-a770-ffef70344441/4/a4f964ba-b52e-41e8-b25c-06cd70c1efad/2?artistId={f}&countryCode=US&deviceType=BROWSER"
-                album_data = await clinet.get(url=artist_albums, headers=header)
-                alb = album_data.json()
-
-                albums_ids = []
-                for album in alb.get("rows")[0]["modules"][0]["pagedList"]["items"]:
-                    albums_ids.append(album["id"])
-
-                all_tracks = []
-                for album_id in albums_ids:
-                    album_endpoint = f"https://api.tidal.com/v1/pages/album?albumId={album_id}&countryCode=US&deviceType=BROWSER"
-                    album_info = await clinet.get(url=album_endpoint, headers=header)
-                    album_tracks = album_info.json().get("rows")[1]["modules"][0][
-                        "pagedList"
-                    ]["items"]
-                    all_tracks.extend([track["item"] for track in album_tracks])
-
-                return [alb, all_tracks]
 
     except httpx.ConnectTimeout:
         raise HTTPException(
@@ -629,7 +608,10 @@ async def get_playlist(id: str):
 
 
 @app.api_route("/artist/", methods=["GET"])
-async def get_artist(id: int):
+async def get_artist(
+    id: Union[int, None] = Query(default=None),
+    f: Union[int, None] = Query(default=None),
+):
     try:
         tokz = await refresh()
         tidal_token = tokz
@@ -637,30 +619,56 @@ async def get_artist(id: int):
         header = {"authorization": f"Bearer {tidal_token}"}
         async with httpx.AsyncClient(http2=True) as clinet:
             try:
-                global sed_1
-                album_search = await clinet.get(url=search_url, headers=header)
-                sed_1 = album_search.json()
-                artist_ids = []
-                artist_cover = sed_1["picture"].replace("-", "/")
-                artist_ids.append(artist_cover)
-                artist_name = sed_1["name"]
-                artist_ids.append(artist_name)
-                artist_id = sed_1["id"]
-                artist_ids.append(artist_id)
+                if id:
+                    global sed_1
+                    album_search = await clinet.get(url=search_url, headers=header)
+                    sed_1 = album_search.json()
+                    artist_ids = []
+                    artist_cover = sed_1["picture"].replace("-", "/")
+                    artist_ids.append(artist_cover)
+                    artist_name = sed_1["name"]
+                    artist_ids.append(artist_name)
+                    artist_id = sed_1["id"]
+                    artist_ids.append(artist_id)
 
-                json_data = [
-                    {
-                        "id": artist_ids[i + 2],
-                        "name": artist_ids[i + 1],
-                        "750": f"https://resources.tidal.com/images/{artist_ids[i]}/750x750.jpg",
-                    }
-                    for i in range(0, len(artist_ids), 3)
-                ]
+                    json_data = [
+                        {
+                            "id": artist_ids[i + 2],
+                            "name": artist_ids[i + 1],
+                            "750": f"https://resources.tidal.com/images/{artist_ids[i]}/750x750.jpg",
+                        }
+                        for i in range(0, len(artist_ids), 3)
+                    ]
 
-                return [sed_1, json_data]
+                    return [sed_1, json_data]
+
+                if f:
+                    artist_albums = f"https://api.tidal.com/v1/pages/single-module-page/ae223310-a4c2-4568-a770-ffef70344441/4/a4f964ba-b52e-41e8-b25c-06cd70c1efad/2?artistId={f}&countryCode=US&deviceType=BROWSER"
+                    album_data = await clinet.get(url=artist_albums, headers=header)
+                    alb = album_data.json()
+
+                    albums_ids = []
+                    for album in alb.get("rows")[0]["modules"][0]["pagedList"]["items"]:
+                        albums_ids.append(album["id"])
+
+                    all_tracks = []
+                    for album_id in albums_ids:
+                        album_endpoint = f"https://api.tidal.com/v1/pages/album?albumId={album_id}&countryCode=US&deviceType=BROWSER"
+                        album_info = await clinet.get(
+                            url=album_endpoint, headers=header
+                        )
+                        album_tracks = album_info.json().get("rows")[1]["modules"][0][
+                            "pagedList"
+                        ]["items"]
+                        all_tracks.extend([track["item"] for track in album_tracks])
+
+                    return [alb, all_tracks]
 
             except AttributeError:
-                raise HTTPException(status_code=404)
+                url = f"https://api.tidal.com/v1/pages/artist?artistId={id}&countryCode=US&locale=en_US&deviceType=BROWSER"
+                artist_data = await clinet.get(url=url, headers=header)
+                art = artist_data.json()
+                return [art]
 
     except httpx.ConnectTimeout:
         raise HTTPException(
@@ -804,11 +812,11 @@ async def get_cover(id: Union[int, None] = None, q: Union[str, None] = None):
         )
 
 
-# async def main():
-#     config = uvicorn.Config("main:app", host="0.0.0.0", port=5000, workers=8)
-#     server = uvicorn.Server(config)
-#     await server.serve()
+async def main():
+    config = uvicorn.Config("server.api:app", host="0.0.0.0", port=5000, workers=8)
+    server = uvicorn.Server(config)
+    await server.serve()
 
 
-# if __name__ == "__main__":
-#     asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
