@@ -1,15 +1,16 @@
+import asyncio
 import base64
 import json
 import os
 from typing import Union
-import uvicorn
+
 import httpx
 import redis.asyncio as redis
 import rich
+import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse, HTMLResponse
-import asyncio
 
 app = FastAPI(title="HiFi-RestAPI", version="v1.0", description="Tidal Music Proxy")
 
@@ -642,27 +643,35 @@ async def get_artist(
 
                     return [sed_1, json_data]
 
-                if f:
+                try:
+                    if f:
+                        artist_albums = f"https://api.tidal.com/v1/pages/single-module-page/ae223310-a4c2-4568-a770-ffef70344441/4/a4f964ba-b52e-41e8-b25c-06cd70c1efad/2?artistId={f}&countryCode=US&deviceType=BROWSER"
+                        album_data = await clinet.get(url=artist_albums, headers=header)
+                        alb = album_data.json()
+
+                        albums_ids = []
+                        for album in alb.get("rows")[0]["modules"][0]["pagedList"][
+                            "items"
+                        ]:
+                            albums_ids.append(album["id"])
+
+                        all_tracks = []
+                        for album_id in albums_ids:
+                            album_endpoint = f"https://api.tidal.com/v1/pages/album?albumId={album_id}&countryCode=US&deviceType=BROWSER"
+                            album_info = await clinet.get(
+                                url=album_endpoint, headers=header
+                            )
+                            album_tracks = album_info.json().get("rows")[1]["modules"][
+                                0
+                            ]["pagedList"]["items"]
+                            all_tracks.extend([track["item"] for track in album_tracks])
+
+                        return [alb, all_tracks]
+                except Exception:
                     artist_albums = f"https://api.tidal.com/v1/pages/single-module-page/ae223310-a4c2-4568-a770-ffef70344441/4/a4f964ba-b52e-41e8-b25c-06cd70c1efad/2?artistId={f}&countryCode=US&deviceType=BROWSER"
                     album_data = await clinet.get(url=artist_albums, headers=header)
                     alb = album_data.json()
-
-                    albums_ids = []
-                    for album in alb.get("rows")[0]["modules"][0]["pagedList"]["items"]:
-                        albums_ids.append(album["id"])
-
-                    all_tracks = []
-                    for album_id in albums_ids:
-                        album_endpoint = f"https://api.tidal.com/v1/pages/album?albumId={album_id}&countryCode=US&deviceType=BROWSER"
-                        album_info = await clinet.get(
-                            url=album_endpoint, headers=header
-                        )
-                        album_tracks = album_info.json().get("rows")[1]["modules"][0][
-                            "pagedList"
-                        ]["items"]
-                        all_tracks.extend([track["item"] for track in album_tracks])
-
-                    return [alb, all_tracks]
+                    return [alb]
 
             except AttributeError:
                 url = f"https://api.tidal.com/v1/pages/artist?artistId={id}&countryCode=US&locale=en_US&deviceType=BROWSER"
